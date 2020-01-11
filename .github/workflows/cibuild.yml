@@ -26,7 +26,6 @@ jobs:
         name:    release
         needs:   build
         runs-on: ubuntu-latest
-        if:      github.ref == 'master' && github.event == 'push'
         steps:
         -   name: Git Checkout
             uses: actions/checkout@v1
