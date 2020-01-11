@@ -19,15 +19,21 @@ jobs:
             uses: actions/setup-java@v1
             with: 
                 java-version: 1.8
-        -       name: Build
-                shell: bash
-                run: ./gradlew build
+        -   name: Build
+            shell: bash
+            run: ./gradlew build
     release:
         name:    release
         needs:   build
         runs-on: ubuntu-latest
-        if:      success() && github.ref == 'master' && github.event == 'push'
+        if:      github.ref == 'master' && github.event == 'push'
         steps:
+        -   name: Git Checkout
+            uses: actions/checkout@v1
+        -   name: Set up Java
+            uses: actions/setup-java@v1
+            with:
+                java-version: 1.8
         -   name: Release 
             shell: bash
             run: ./gradlew release
