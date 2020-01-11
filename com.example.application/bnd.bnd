@@ -1,0 +1,4 @@
+
+-dependson com.example.eval.simple.provider
+-fixupmessages: The JAR is empty
+-export application.bndrun
