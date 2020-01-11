@@ -20,7 +20,7 @@ jobs:
       			shell: bash
       			run: ./gradlew build
   	release: 
-		name: release
+        name: release
 		needs: build
     		runs-on: ubuntu-latest
 		if: github.ref = "master" && github.event = "push" && secrets.REPOSITORY_PASSWORD
@@ -31,4 +31,5 @@ jobs:
 		 env:
         		REPOSITORY_USERNAME: ${{ secrets.REPOSITORY_USERNAME }}
         		REPOSITORY_PASSWORD: ${{ secrets.REPOSITORY_PASSWORD }}
+
 
