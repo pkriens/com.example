@@ -26,7 +26,7 @@ jobs:
         name:    release
         needs:   build
         runs-on: ubuntu-latest
-        if:      github.ref == "master" && github.event == "push" && secrets.REPOSITORY_PASSWORD
+        if:      success() && github.ref == 'master' && github.event == 'push' && secrets.REPOSITORY_PASSWORD
         steps:
         -   name: Release 
             shell: bash
