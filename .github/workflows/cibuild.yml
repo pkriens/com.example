@@ -1,5 +1,5 @@
 name: CI Build
-
+  
 on: [push, pull_request]
 
 env:
@@ -7,29 +7,28 @@ env:
   GRADLE_OPTS: -Dorg.gradle.parallel=false
 
 jobs:
-  	build:
-    		name: build on OpenJDK Linux
-    		runs-on: ubuntu-latest
-    		steps:
-    		- 	name: Git Checkout
-      			uses: actions/checkout@v1
-    		- 	name: Set up Java
-      			uses: actions/setup-java@v1
-      			with: java-version: 1.8
-    		- 	name: Build
-      			shell: bash
-      			run: ./gradlew build
-  	release: 
+        build:
+                name: build on OpenJDK Linux
+                runs-on: ubuntu-latest
+                steps:
+                -       name: Git Checkout
+                        uses: actions/checkout@v1
+                -       name: Set up Java
+                        uses: actions/setup-java@v1
+                        with: java-version: 1.8
+                -       name: Build
+                        shell: bash
+                        run: ./gradlew build
+        release:
         name: release
-		needs: build
-    		runs-on: ubuntu-latest
-		if: github.ref = "master" && github.event = "push" && secrets.REPOSITORY_PASSWORD
-		steps:
-    		- 	name: Release
-      			shell: bash
-      			run: ./gradlew release
-		 env:
-        		REPOSITORY_USERNAME: ${{ secrets.REPOSITORY_USERNAME }}
-        		REPOSITORY_PASSWORD: ${{ secrets.REPOSITORY_PASSWORD }}
-
+                needs: build
+                runs-on: ubuntu-latest
+                if: github.ref = "master" && github.event = "push" && secrets.REPOSITORY_PASSWORD
+                steps:
+    -   name: Release 
+                        shell: bash
+                        run: ./gradlew release
+                 env:
+                        REPOSITORY_USERNAME: ${{ secrets.REPOSITORY_USERNAME }}
+                        REPOSITORY_PASSWORD: ${{ secrets.REPOSITORY_PASSWORD }}
 
