@@ -13,4 +13,6 @@
 	org.osgi.util.promise;version='[1.1.1,1.1.2)',\
 	com.example.eval.api;version=snapshot,\
 	com.example.eval.simple.provider;version=snapshot
--resolve: beforelaunch
+-resolve: auto
+-runee: JavaSE-1.8
+-runfw: org.apache.felix.framework
